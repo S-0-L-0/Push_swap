@@ -6,7 +6,7 @@
 /*   By: edforte <edforte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 16:09:39 by edforte           #+#    #+#             */
-/*   Updated: 2024/06/25 17:11:15 by edforte          ###   ########.fr       */
+/*   Updated: 2024/06/26 12:30:08 by edforte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	tmp->next = new;
 }
 
-void	make_list(t_list *lst, int value)
+t_list	make_list(t_list *lst, int value)
 {
 	t_list	*new_node;
 
@@ -52,6 +52,7 @@ void	make_list(t_list *lst, int value)
 		return (NULL);
 	}
 	ft_lstadd_back(lst, new_node);
+	return (lst);
 }
 
 int	ft_atol(const char *str)

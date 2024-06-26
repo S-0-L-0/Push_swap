@@ -6,7 +6,7 @@
 /*   By: edforte <edforte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 16:09:18 by edforte           #+#    #+#             */
-/*   Updated: 2024/06/25 14:53:31 by edforte          ###   ########.fr       */
+/*   Updated: 2024/06/26 12:46:48 by edforte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ typedef struct s_list
 void	push_swap(int ac, char **av);
 t_list	*ft_lstnew(int *content);
 void	ft_lstadd_back(t_list **lst, t_list *new);
-int		ft_atoi(const char *str);
-void	make_list(t_list **lst, int value);
+int		ft_atol(const char *str);
+t_list	make_list(t_list **lst, int value);
 char	**ft_split(char const *s, char c);
 void	ft_lstadd_front(t_list **lst, t_list *new);
 #endif
