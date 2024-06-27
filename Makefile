@@ -1,34 +1,47 @@
-NAME = libft.a
-SOURCES = \
-	ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
-	ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c \
-	ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c \
-	ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c \
-	ft_calloc.c ft_strdup.c ft_substr.c ft_strjoin.c ft_split.c ft_itoa.c ft_striteri.c\
-	ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c ft_strtrim.c\
-	ft_strmapi.c
 
-OBJS = $(SOURCES:.c=.o)
-
-CC = gcc
-CFLAGS = -Wall -Wextra -Werror
-
-all: $(NAME)
-
-$(NAME):	$(OBJS)
-		ar rc $(NAME) $(OBJS)
-		ranlib $(NAME)
- 
-.c.o:
-	$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: afalconi <afalconi@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/05/22 05:41:09 by afalconi          #+#    #+#              #
+#    Updated: 2023/06/19 11:59:05 by afalconi         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
 
-clean:
-	rm -f $(OBJS) $(BONUS_OBJ)
+CFILES = \
+			input_check.c \
+			push_rule.c \
+			push_swap.c \
+			push_swap_utils.c \
+			reverse_rotate.c \
+			rotate_rule.c \
+			swap_rule.c \
 
-fclean: clean
-	rm -f $(NAME)
 
-re: fclean all
+OBJ = $(CFILES:.c=.o)
 
-.PHONY: all bonus clean fclean re
+
+CC = @ gcc
+FLAGS = -g -Wall -Wextra -Werror
+RM = rm -rf
+
+NAME = push_swap
+
+name : $(NAME)
+
+all : $(NAME)
+
+$(NAME) : $(OBJ)
+	 $(CC) $(FLAGS) $(OBJ) -o $(NAME)
+
+clean :
+	@ $(RM) $(OBJ)
+
+fclean : clean
+	@ $(RM) $(NAME)
+
+re : fclean all

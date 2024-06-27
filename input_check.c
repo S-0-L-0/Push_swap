@@ -12,22 +12,18 @@
 
 #include "push_swap.h"
 
-static int av_are_nbrs(int ac, char **av)
+static int av_are_nbrs(char **numbers)
 {
 	int		i;
-	char	**numbers;
 
-	numbers = *av + 1; // questa cosa si puo fare? il primo av é il filename
-	if (ac == 2)
-		numbers = ft_split(*av + 1, 32);
 	i = -1;
-	while(*numbers) // prende pure il filename perche parte da av[0]
+	while(*numbers)
 	{
 		if (*numbers[0] == '-')
 			i ++;
-		while (*numbers[++i])
+		while ((*numbers)[++i])
 		{
-			if (ft_isdigit(numbers[i]) == 0)
+			if (ft_isdigit((*numbers)[i]) == 0)
 				return(1);
 		}
 		i = -1;
@@ -36,43 +32,73 @@ static int av_are_nbrs(int ac, char **av)
 	return(0);
 }
 
-static int av_are_int(int ac, char **av)
+static int av_are_int(char **numbers)
 {
 	int		i;
 	long	nbr;
-	char	**numbers;
 
-	i = 1;
+	i = 0;
 	nbr = 0;
-	numbers = *av + 1; // questa cosa si puo fare? il primo av é il filename
-	if (ac == 2)
-		numbers = ft_split(*av + 1, 32);
 	while (numbers[i])
 	{
 		nbr = ft_atol(numbers[i]);
-		if (nbr < -2147483648 || nbr > 2147483647)
+		if ( nbr < (-2147483648) || nbr > (2147483647))
 			return (1);
 		i ++;
 	}
 	return (0);
 }
-static int av_are_double(int ac, char **av)
+static int av_are_double(char **numbers)
 {
-	char	**numbers;
+	int	i;
+	int	j;
 
 	i = 0;
-	j = 0;
-	numbers = *av + 1; // questa cosa si puo fare? il primo av é il filename
-	if (ac == 2)
-		numbers = ft_split(*av + 1, 32);
+	while (numbers[i])
+	{
+		j = i + 1;
+		while (numbers[j])
+		{
+			if (ft_strcmp(numbers[i], numbers[j]) == 0)
+				return (1);
+			j ++;
+		}
+		i ++;
+	}
+	return (0);
+}
+
+void	free_matrix(char **av)
+{
+	int	i;
+
+	i = 0;
+	while (av[i])
+	{
+		free(av[i]);
+		i ++;
+	}
+	free (av);
 }
 
 int	checker(int ac, char **av)
 {
-	if (av_are_nbrs != 0 || av_are_int != 0 || av_are_double != 0)
+	bool	flag;
+	char	**numbers;
+
+	numbers = av + 1;
+	flag = false;
+	if (ac == 2)
 	{
-		write(2, "Error", 5);
-		write(2, "\n", 1);
-		return (1)
+		numbers = ft_split(*(av + 1), 32);
+		flag = true;
 	}
+	if (av_are_nbrs(numbers) != 0 || av_are_int(numbers) != 0 || av_are_double(numbers) != 0)
+	{
+		write(2, "Error\n", 6);
+		if (flag == true)
+			free_matrix(numbers);
+		return (1);
+	}
+	return (0);
 }

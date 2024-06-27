@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-t_list	*ft_lstnew(int *content)
+t_list	*ft_lstnew(int content)
 {
 	t_list	*node;
 
@@ -42,23 +42,10 @@ void	ft_lstadd_back(t_list **lst, t_list *new)
 	tmp->next = new;
 }
 
-t_list	make_list(t_list *lst, int value)
-{
-	t_list	*new_node;
-
-	new_node = ft_lstnew(value);
-	if (!new_node)
-	{
-		return (NULL);
-	}
-	ft_lstadd_back(lst, new_node);
-	return (lst);
-}
-
-int	ft_atol(const char *str)
+long	ft_atol(const char *str)
 {
 	int		i;
-	int		sign;
+	long	sign;
 	long	res;
 
 	i = 0;
@@ -77,7 +64,7 @@ int	ft_atol(const char *str)
 		res = (res * 10) + (str[i] - '0');
 		i ++;
 	}
-	return (res * (long)sign);
+	return (res * sign);
 }
 
 void	free_list(t_list *lst)
@@ -169,4 +156,47 @@ void	ft_lstadd_front(t_list **lst, t_list *new)
 		return ;
 	new->next = *lst;
 	*lst = new;
+}
+
+int	ft_strcmp(const char *s1, const char *s2)
+{
+	size_t			i;
+	unsigned char	*a;
+	unsigned char	*b;
+
+	i = 0;
+	a = (unsigned char *)s1;
+	b = (unsigned char *)s2;
+	while (a[i] || b[i])
+	{
+		if (a[i] != b[i])
+			return (a[i] - b[i]);
+		i ++;
+	}
+	return (0);
+}
+t_list	*make_list(int ac, char **av)
+{
+	t_list	*a;
+	t_list	*tmp;
+
+	(av) ++;
+	a = ft_lstnew(ft_atol(*av));
+	tmp = a;
+	while (ac > 1)
+	{
+		printf("%lu\n", ft_atol(*av));
+		tmp->next = ft_lstnew(ft_atol(*av));
+		tmp = tmp->next;
+		(av) ++;
+		ac --;
+	}
+	return (a);
+}
+int	ft_isdigit(int c)
+{
+	if (c >= 48 && c <= 57)
+		return (1);
+	else
+		return (0);
 }

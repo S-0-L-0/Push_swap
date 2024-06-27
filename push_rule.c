@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
 void push(t_list **source, t_list **dest, char *str)
 {
 	t_list	*new_node;
