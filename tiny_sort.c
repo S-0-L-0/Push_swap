@@ -6,7 +6,7 @@
 /*   By: edforte <edforte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:46:13 by edforte           #+#    #+#             */
-/*   Updated: 2024/07/11 20:10:59 by edforte          ###   ########.fr       */
+/*   Updated: 2024/07/12 13:44:13 by edforte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	sort_3nbrs(t_manage *stacks)
 void	sort_to5nbrs(t_manage *stacks)
 {
 	while (ft_lstsize(stacks->stack_a) > 3)
-			push(&stacks->stack_a, &stacks->stack_b, "pb\n");
+		push(&stacks->stack_a, &stacks->stack_b, "pb\n");
 	stacks->max_a = max_finder(stacks->stack_a);
 	stacks->min_a = min_finder(stacks->stack_a);
 	sort_3nbrs(stacks);

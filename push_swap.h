@@ -6,7 +6,7 @@
 /*   By: edforte <edforte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/24 16:09:18 by edforte           #+#    #+#             */
-/*   Updated: 2024/07/11 18:40:47 by edforte          ###   ########.fr       */
+/*   Updated: 2024/07/12 13:47:43 by edforte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,11 @@ typedef struct s_manage
 {
 	struct s_list	*stack_a;
 	struct s_list	*stack_b;
-	int		min_a;
-	int		max_a;
-} t_manage;
+	int				min_a;
+	int				max_a;
+}	t_manage;
 
-
-void			push_swap (t_manage *stacks);
+void			push_swap(t_manage *stacks);
 struct s_list	*ft_lstnew(int content);
 void			insert_end(t_list **lst, long content);
 long			ft_atol(const char *str);
@@ -62,7 +61,7 @@ void			sort_2nbrs(t_manage *stacks);
 void			sort_3nbrs(t_manage *stacks);
 void			sort_to5nbrs(t_manage *stacks);
 void			moves_counter(t_manage *stacks);
-struct s_list	*bNode_finder(t_manage *stacks, int content);
+struct s_list	*bnode_finder(t_manage *stacks, int content);
 int				fc_calca(t_manage *stacks, int content);
 struct s_list	*cheap_finder(struct s_list *list);
 int				position(struct s_list *list, struct s_list *node);
@@ -74,6 +73,10 @@ void			free_list(t_list *lst);
 int				already_sorted(struct s_list *stack);
 void			sort_a_nbr(t_manage *stacks);
 void			sort_last(t_manage *stacks);
-
-void			print_list(struct s_list *lst, char ch);
+void			double_mvs(t_manage *stacks, struct s_list *bnod, \
+struct s_list *cheap);
+void			move_a(t_manage *stacks, struct s_list *best_node);
+void			move_b(t_manage *stacks, struct s_list *cheapest);
+void			last_case(t_manage *stacks);
+void			sorting(char **numbers);
 #endif

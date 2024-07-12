@@ -6,7 +6,7 @@
 #    By: edforte <edforte@student.42.fr>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/07/03 11:55:41 by edforte           #+#    #+#              #
-#    Updated: 2024/07/11 15:53:00 by edforte          ###   ########.fr        #
+#    Updated: 2024/07/12 13:22:33 by edforte          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ CFILES = \
 			rules.c \
 			tiny_sort.c \
 			tiny_sort_utils.c \
+			tiny_sort_utils2.c \
 
 
 OBJ = $(CFILES:.c=.o)

@@ -6,7 +6,7 @@
 /*   By: edforte <edforte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:04:55 by edforte           #+#    #+#             */
-/*   Updated: 2024/07/11 10:47:40 by edforte          ###   ########.fr       */
+/*   Updated: 2024/07/12 13:28:40 by edforte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	min_finder(struct s_list *stack_a)
 {
-	int		min;
+	int				min;
 	struct s_list	*tmp;
 
 	min = 2147483647;
@@ -27,6 +27,7 @@ int	min_finder(struct s_list *stack_a)
 	}
 	return (min);
 }
+
 int	av_finder(struct s_list *stack_a)
 {
 	struct s_list	*tmp;
@@ -36,19 +37,21 @@ int	av_finder(struct s_list *stack_a)
 	tmp = stack_a;
 	size = ft_lstsize(tmp);
 	i = 0;
-	while (i < size/2)
+	while (i < size / 2)
 	{
 		tmp = tmp->next;
 		i ++;
 	}
-	while (tmp->content == min_finder(stack_a) || tmp->content == max_finder(stack_a))
+	while (tmp->content == min_finder(stack_a) || \
+	tmp->content == max_finder(stack_a))
 		tmp = tmp->next;
 	i = tmp->content;
 	return (i);
 }
+
 int	max_finder(struct s_list *stack_a)
 {
-	int		max;
+	int				max;
 	struct s_list	*tmp;
 
 	max = -2147483648;

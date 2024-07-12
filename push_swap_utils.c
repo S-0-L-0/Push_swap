@@ -6,7 +6,7 @@
 /*   By: edforte <edforte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/08 14:41:06 by edforte           #+#    #+#             */
-/*   Updated: 2024/07/11 17:24:55 by edforte          ###   ########.fr       */
+/*   Updated: 2024/07/12 13:34:31 by edforte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,24 @@ void	moves_counter(t_manage *stacks)
 
 	tmp = stacks->stack_b;
 	i = 0;
-	while(tmp)
+	while (tmp)
 	{
-		if (i <= (ft_lstsize(tmp)/2) + 1)
+		if (i <= (ft_lstsize(tmp) / 2) + 1)
 		{
 			tmp->moves = i;
 			tmp->moves += fc_calca(stacks, tmp->content);
-
 		}
 		else
 		{
 			tmp->moves = (ft_lstsize(stacks->stack_b) - i);
 			tmp->moves += fc_calca(stacks, tmp->content);
-
 		}
 		i ++;
 		tmp = tmp->next;
 	}
 }
 
-struct s_list	*bNode_finder(t_manage *stacks, int content)
+struct s_list	*bnode_finder(t_manage *stacks, int content)
 {
 	struct s_list	*tmp;
 	struct s_list	*last_node;
@@ -49,7 +47,7 @@ struct s_list	*bNode_finder(t_manage *stacks, int content)
 		last_node = last_node->next;
 	if (content > last_node->content && content < tmp->content)
 	{
-			return (tmp);
+		return (tmp);
 	}
 	while (tmp->next)
 	{
@@ -70,13 +68,13 @@ int	fc_calca(t_manage *stacks, int content)
 
 	i = 0;
 	tmp = stacks->stack_a;
-	best_node = bNode_finder(stacks, content);
+	best_node = bnode_finder(stacks, content);
 	while (tmp && tmp != best_node)
 	{
 		tmp = tmp->next;
 		i ++;
 	}
-	if (i < (ft_lstsize(stacks->stack_a)/2) + 1)
+	if (i < (ft_lstsize(stacks->stack_a) / 2) + 1)
 		return (i + 1);
 	else
 		return ((ft_lstsize(stacks->stack_a) - i) + 1);
@@ -87,7 +85,7 @@ struct s_list	*cheap_finder(struct s_list *list)
 	struct s_list	*tmp;
 	struct s_list	*cheapest;
 	int				res;
-	
+
 	res = 2147483647;
 	cheapest = NULL;
 	tmp = list;

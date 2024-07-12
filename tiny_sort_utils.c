@@ -6,7 +6,7 @@
 /*   By: edforte <edforte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 19:05:11 by edforte           #+#    #+#             */
-/*   Updated: 2024/07/11 20:11:30 by edforte          ###   ########.fr       */
+/*   Updated: 2024/07/12 13:43:43 by edforte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ struct s_list	*find_highest(struct s_list *list)
 	}
 	return (highest);
 }
+
 struct s_list	*find_shortest(struct s_list *list)
 {
 	struct s_list	*shortest;
@@ -84,26 +85,19 @@ void	sort_last(t_manage *stacks)
 		rotate(&stacks->stack_a, "ra\n");
 	}
 	else if (stacks->stack_b->content < stacks->stack_a->content)
-	{
 		push(&stacks->stack_b, &stacks->stack_a, "pa\n");
-	}
 	else if (stacks->stack_b->content > stacks->stack_a->content && \
 	stacks->stack_b->content < stacks->stack_a->next->content)
 	{
 		push(&stacks->stack_b, &stacks->stack_a, "pa\n");
 		swap(&stacks->stack_a, "sa\n");
 	}
-	else if (stacks->stack_b->content > stacks->stack_a->next->content && \
-	stacks->stack_b->content < stacks->stack_a->next->next->content)
-	{
-		rotate(&stacks->stack_a, "rra\n");
-		push(&stacks->stack_b, &stacks->stack_a, "pa\n");
-		swap(&stacks->stack_a, "sa\n");
-		reverse_rotate(&stacks->stack_a, "rra\n");
-	}
 	else if (stacks->stack_b->content > stacks->stack_a->next->next->content)
 	{
 		reverse_rotate(&stacks->stack_a, "rra\n");
 		push(&stacks->stack_b, &stacks->stack_a, "pa\n");
 	}
+	else if (stacks->stack_b->content > stacks->stack_a->next->content && \
+	stacks->stack_b->content < stacks->stack_a->next->next->content)
+		last_case(stacks);
 }

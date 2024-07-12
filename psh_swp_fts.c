@@ -6,7 +6,7 @@
 /*   By: edforte <edforte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 15:51:17 by edforte           #+#    #+#             */
-/*   Updated: 2024/07/11 17:24:22 by edforte          ###   ########.fr       */
+/*   Updated: 2024/07/12 13:33:27 by edforte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	push_b(t_manage *stacks)
 			rotate(&stacks->stack_a, "ra\n");
 	}
 }
+
 void	sort_a(t_manage *stacks)
 {
 	if (stacks->stack_a->content == stacks->max_a)
@@ -54,53 +55,25 @@ void	push_a(t_manage *stacks)
 {
 	struct s_list	*cheapest;
 	struct s_list	*best_node;
-	int				bn_pos;
-	int				chp_pos;
 
-	bn_pos = 0;
-	chp_pos = 0;
 	while (stacks->stack_b)
 	{
 		moves_counter(stacks);
 		cheapest = cheap_finder(stacks->stack_b);
-		best_node = bNode_finder(stacks, cheapest->content);
+		best_node = bnode_finder(stacks, cheapest->content);
 		while (stacks->stack_a != best_node || stacks->stack_b != cheapest)
 		{
 			if (stacks->stack_a != best_node && stacks->stack_b != cheapest)
-			{
-				bn_pos = position(stacks->stack_a, best_node);
-				chp_pos = position(stacks->stack_b, cheapest);
-				if (bn_pos <= ft_lstsize(stacks->stack_a)/2 && chp_pos <= ft_lstsize(stacks->stack_b)/2)
-				{
-					rotate(&stacks->stack_a, NULL);
-					rotate(&stacks->stack_b, "rr\n");
-				}
-				else if (bn_pos > ft_lstsize(stacks->stack_a)/2 && chp_pos > ft_lstsize(stacks->stack_b)/2)
-				{
-					reverse_rotate(&stacks->stack_a, NULL);
-					reverse_rotate(&stacks->stack_b, "rrr\n");
-				}
-			}
-			if (stacks->stack_a != best_node)
-			{
-				bn_pos = position(stacks->stack_a, best_node);
-				if (bn_pos <= ft_lstsize(stacks->stack_a)/2)
-					rotate(&stacks->stack_a, "ra\n");
-				else
-					reverse_rotate(&stacks->stack_a, "rra\n");
-			}
+				double_mvs(stacks, best_node, cheapest);
+			else if (stacks->stack_a != best_node)
+				move_a(stacks, best_node);
 			else if (stacks->stack_b != cheapest)
-			{
-				chp_pos = position(stacks->stack_b, cheapest);
-				if (chp_pos <= ft_lstsize(stacks->stack_b)/2)
-					rotate(&stacks->stack_b, "rb\n");
-				else
-					reverse_rotate(&stacks->stack_b, "rrb\n");
-			}
+				move_b(stacks, cheapest);
 		}
 		push(&stacks->stack_b, &stacks->stack_a, "pa\n");
 	}
 }
+
 void	final_sort(t_manage *stacks)
 {
 	struct s_list	*first;
@@ -112,7 +85,7 @@ void	final_sort(t_manage *stacks)
 	pos = position(stacks->stack_a, first);
 	while (stacks->stack_a != first)
 	{
-		if (pos <= ft_lstsize(stacks->stack_a)/2)
+		if (pos <= ft_lstsize(stacks->stack_a) / 2)
 			rotate(&stacks->stack_a, "ra\n");
 		else
 			reverse_rotate(&stacks->stack_a, "rra\n");

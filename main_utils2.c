@@ -6,7 +6,7 @@
 /*   By: edforte <edforte@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/10 16:08:32 by edforte           #+#    #+#             */
-/*   Updated: 2024/07/11 11:20:55 by edforte          ###   ########.fr       */
+/*   Updated: 2024/07/12 13:29:14 by edforte          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,20 @@ struct s_list	*ft_lstnew(int content)
 	return (node);
 }
 
-void insert_end(t_list **lst, long content)
+void	insert_end(t_list **lst, long content)
 {
 	t_list	*new_node;
 	t_list	*tmp;
 
 	new_node = malloc(sizeof(t_list));
 	if (!new_node)
-		return;
+		return ;
 	new_node->content = content;
 	new_node->next = NULL;
 	if (*lst == NULL)
 	{
 		*lst = new_node;
-		return;
+		return ;
 	}
 	tmp = *lst;
 	while (tmp->next)
